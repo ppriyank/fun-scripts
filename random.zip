@@ -1,0 +1,31 @@
+sol = ""
+import os 
+import subprocess
+
+
+for folder in os.walk("./"):
+	name = folder[0].split("/")[1]
+	try: 	
+		path = folder[0] + "/"
+		file = folder[2][0]
+		path = path.replace(" " , "\ ")
+		path = path.replace("(" , "\(")
+		path = path.replace(")" , "\)")
+		file = file.replace(" " , "\ ")
+		path_new = path + file
+		os.system("unzip %s"%(path_new) )
+		os.system("gnatmake -f  xyz.adb")
+		print("====" , name, "====")
+		proc = subprocess.Popen(["./assignmentmain < ~/some_txt"], stdout=subprocess.PIPE, shell=True)
+		(out, err) = proc.communicate()
+		out = str(out)
+		z = out.split(" ")
+		e = []
+		for ele in z:
+			if ele != "" and ele != "\\n" and ele != "\n" and ele != "\\n'" and ele != "\n'":
+				e.append(ele)
+		submit = e[1:]
+		sol == submit
+		os.remove("")
+	except Exception as e:
+		print(name)
